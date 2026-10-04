@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="brand"><view class="brand-mark">合</view><view><view class="brand-name">我的</view><view class="muted">账号与服务设置</view></view></view>
+  <view class="card">
+    <view class="section-title">账号</view>
+    <view class="notice">微信登录、手机号验证码、实名/年龄核验尚未接入。本演示不创建账号，也不保存个人资料。</view>
+    <button class="btn full" disabled>登录/注册（尚未接入）</button>
+  </view>
+  <view class="card">
+    <view class="section-title">帮助与安全</view>
+    <view class="list-row"><text>社区规则</text><text class="muted">查看</text></view>
+    <view class="list-row"><text>隐私政策</text><text class="muted">待正式版本发布</text></view>
+    <view class="list-row"><text>投诉与申诉</text><text class="muted">服务未接入</text></view>
+  </view>
+  <view class="footer-note">合拍小程序原生演示工程。正式运营需补齐资质、服务端、内容治理和安全运营。</view>
+</view>
+

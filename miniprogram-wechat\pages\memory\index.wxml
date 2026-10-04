@@ -1,0 +1,12 @@
+<view class="page">
+  <view class="brand"><view class="brand-mark">合</view><view><view class="brand-name">记忆管理</view><view class="muted">了解记录和数据权利</view></view></view>
+  <view class="notice">当前是演示模式，没有保存到服务端的 AI 聊天或长期记忆。正式服务需要单独说明用途、保存期限、第三方模型处理方式，并提供查阅、导出和删除渠道。</view>
+  <view class="card">
+    <view class="section-title">长期记忆授权</view>
+    <view class="muted">正式上线后，记忆功能会在说明数据用途和保存方式后取得你的明确授权。你可以撤回授权并管理保存的信息。</view>
+    <view class="list-row"><text>本机演示记忆</text><text class="muted">未启用</text></view>
+    <button class="btn light full" disabled>查看或导出（服务未接入）</button>
+    <button class="btn light full" disabled>删除全部记录（服务未接入）</button>
+  </view>
+</view>
+

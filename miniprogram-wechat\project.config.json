@@ -1,0 +1,18 @@
+{
+  "description": "合拍微信小程序原生界面原型",
+  "packOptions": {"ignore": [{"type":"folder","value":"node_modules"}]},
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "compileHotReLoad": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.4.8",
+  "appid": "touristappid",
+  "projectname": "hepai-wechat-miniprogram",
+  "miniprogramRoot": "./"
+}
+

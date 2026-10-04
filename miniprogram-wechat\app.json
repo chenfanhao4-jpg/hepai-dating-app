@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/match/index",
+    "pages/chat/index",
+    "pages/memory/index",
+    "pages/me/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "合拍",
+    "navigationBarBackgroundColor": "#f6f7f3",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f7f3"
+  },
+  "tabBar": {
+    "color": "#788078",
+    "selectedColor": "#416b57",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {"pagePath":"pages/match/index","text":"匹配"},
+      {"pagePath":"pages/chat/index","text":"聊聊"},
+      {"pagePath":"pages/memory/index","text":"记忆"},
+      {"pagePath":"pages/me/index","text":"我的"}
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}
+
