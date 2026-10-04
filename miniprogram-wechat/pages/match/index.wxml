@@ -1,34 +1,30 @@
 <view class="page">
-  <view class="brand"><view class="brand-mark">合</view><view><view class="brand-name">合拍</view><view class="muted">AI 交友匹配助手</view></view></view>
-  <view class="eyebrow">真人匹配</view>
+  <view class="brand"><view class="brand-mark">合</view><view><view class="brand-name">合拍</view><view class="muted">同城交友 · 认真认识彼此</view></view></view>
+  <view class="eyebrow">今天还可以匹配 {{remaining}} 次</view>
   <view class="title">找到聊得来的人</view>
-  <view class="muted">可以直接浏览匹配演示，也可以自愿和 AI 聊聊。</view>
-  <view class="notice">演示模式：候选资料均为虚构样例，不是真人。注册、真人匹配、AI 服务和支付尚未接入。</view>
+  <view class="notice">这是本机交互演示，资料均为虚构，不是真人用户。账号、真实匹配和消息服务尚未接入。</view>
+
   <view class="card">
     <view class="section-title">匹配筛选</view>
     <text class="field-label">年龄区间</text>
     <view class="row"><input class="input age-input" type="number" value="{{ageMin}}" bindinput="onAgeMin"/><text>至</text><input class="input age-input" type="number" value="{{ageMax}}" bindinput="onAgeMax"/><text>岁</text></view>
     <text class="field-label">城市</text>
     <picker class="picker" mode="selector" range="{{cities}}" value="{{cityIndex}}" bindchange="onCityChange"><view>{{cities[cityIndex]}}</view></picker>
-    <view class="footer-note">这里只在本机筛选演示资料。真实同城匹配需要用户授权、正式账号和服务端用户池。</view>
+    <view class="footer-note">每天提供 10 次演示匹配机会。选择城市后仅筛选同城演示资料；暂不读取手机定位。</view>
   </view>
+
   <view class="card">
     <view class="row" style="justify-content:space-between"><view class="section-title">推荐样例</view><view class="muted small">{{shownCount}} 个演示资料</view></view>
     <view wx:for="{{visibleMatches}}" wx:key="id" class="candidate">
       <view class="candidate-head"><view class="avatar">{{item.emoji}}</view><view><view class="candidate-name">{{item.name}} · {{item.age}}岁</view><view class="muted">{{item.city}} · 虚构演示资料</view></view></view>
       <view class="tags"><text wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this" class="tag">{{tag}}</text></view>
       <view class="muted">{{item.intro}}</view>
-      <button class="btn light full" data-id="{{item.id}}" bindtap="onReport">举报入口演示</button>
+      <button class="btn light full" data-name="{{item.name}}" bindtap="onLike">打个招呼（演示）</button>
+      <button class="btn light full danger" data-name="{{item.name}}" bindtap="onReport">举报入口</button>
     </view>
-    <view wx:if="{{visibleMatches.length===0}}" class="notice">当前筛选条件下没有演示资料，请调整年龄或城市。</view>
-    <button class="btn full" bindtap="onMatch">{{matchStarted ? '换一批演示资料' : '直接匹配'}}</button>
+    <view wx:if="{{shownCount===0}}" class="notice">当前条件下没有演示资料，请调整年龄或城市。</view>
+    <button class="btn full" bindtap="onMatch" disabled="{{remaining===0}}">{{remaining===0 ? '今日演示次数已用完' : '直接匹配'}}</button>
   </view>
-  <view class="card">
-    <view class="section-title">权益价格预览</view>
-    <view class="list-row"><text>每日随机匹配</text><text class="price">10 次</text></view>
-    <view class="list-row"><text>额外匹配</text><text class="price">¥1 / 2 次</text></view>
-    <view class="list-row"><text>VIP</text><text class="price">¥15 / 30 天</text></view>
-    <view class="list-row"><text>AI 聊天</text><text class="price">需有余额</text></view>
-    <view class="notice">价格仅为原型展示，购买与扣款尚未接入。AI 聊天按实际使用量收费，正式开放前会明确展示用户收费标准。</view>
-  </view>
+
+  <view class="footer-note">匹配与聊天真实开放前，还需完成微信服务类目审核、账号和服务端建设及内容安全流程。</view>
 </view>

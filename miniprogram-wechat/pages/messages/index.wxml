@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="brand"><view class="brand-mark">合</view><view><view class="brand-name">消息</view><view class="muted">从双方愿意开始的交流</view></view></view>
+  <view class="notice">演示模式：暂时没有真人账号或聊天服务。正式版仅在双方同意后开放私聊，并提供拉黑、举报与安全提醒。</view>
+  <view class="card">
+    <view class="section-title">新的匹配</view>
+    <view class="muted">当双方互相表示有兴趣后，对话会出现在这里。当前没有真实匹配。</view>
+  </view>
+  <view class="card story-card">
+    <view class="eyebrow">新功能概念 · 预写内容，不使用 AI</view>
+    <view class="section-title">双人故事卡：末班车之后</view>
+    <view class="muted">匹配成功后，两人可以轮流做选择，一起体验短篇分支故事，也可以用它打开话题。它是交友聊天的辅助玩法，不改变产品的单身交友定位。</view>
+    <button wx:if="{{step<0}}" class="btn full" bindtap="onStart">体验一段故事</button>
+    <view wx:else>
+      <view class="notice">{{steps[step].scene}}</view>
+      <view class="muted small" wx:if="{{lastChoice}}">刚才选择：{{lastChoice}}</view>
+      <button class="btn light full" data-choice="{{steps[step].left}}" bindtap="onChoose">{{steps[step].left}}</button>
+      <button class="btn full" data-choice="{{steps[step].right}}" bindtap="onChoose">{{steps[step].right}}</button>
+      <button class="btn light full" bindtap="onReset">重新开始</button>
+    </view>
+  </view>
+  <view class="footer-note">本故事选择只保存在当前页面演示状态中，不上传或用于画像。</view>
+</view>

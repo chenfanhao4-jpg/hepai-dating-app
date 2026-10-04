@@ -6,17 +6,28 @@ const demoMatches = [
   {id:'a5',name:'晴窗',age:27,city:'北京',emoji:'☀️',tags:['展览','旅行','坦诚'],intro:'希望遇见能坦诚交流、彼此支持的人。'}
 ];
 
+function localDay(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
 Page({
-  data:{ageMin:18,ageMax:60,cities:['不限城市 · 随机匹配','杭州','宁波','上海','北京','成都'],cityIndex:0,visibleMatches:demoMatches.slice(0,2),shownCount:2,matchStarted:false,round:0},
+  data:{ageMin:18,ageMax:60,cities:['不限城市 · 随机匹配','杭州','宁波','上海','北京','成都'],cityIndex:0,visibleMatches:demoMatches.slice(0,2),shownCount:2,remaining:10,round:0},
   onLoad(){
-    if(wx.getStorageSync('hepai_adult_demo')===true)return;
-    wx.showModal({title:'仅限成年人体验',content:'这是演示原型，不包含实名或年龄核验。未满18岁请退出。',confirmText:'我已满18岁',cancelText:'退出',success:(res)=>{
-      if(res.confirm)wx.setStorageSync('hepai_adult_demo',true);
-      else wx.reLaunch({url:'/pages/me/index'});
-    }});
+    if(wx.getStorageSync('hepai_adult_demo')!==true){
+      wx.showModal({title:'仅限成年人体验',content:'这是演示原型，不包含实名或年龄核验。未满18岁请退出。',confirmText:'我已满18岁',cancelText:'退出',success:(res)=>{
+        if(res.confirm)wx.setStorageSync('hepai_adult_demo',true);
+        else wx.reLaunch({url:'/pages/me/index'});
+      }});
+    }
   },
-  onAgeMin(e){this.setData({ageMin:e.detail.value||18});},
-  onAgeMax(e){this.setData({ageMax:e.detail.value||60});},
+  onShow(){
+    const usage=wx.getStorageSync('hepai_match_usage')||{};
+    const used=usage.day===localDay()?Number(usage.used)||0:0;
+    this.setData({remaining:Math.max(0,10-used)});
+  },
+  onAgeMin(e){this.setData({ageMin:e.detail.value||18},()=>this.filterDemo());},
+  onAgeMax(e){this.setData({ageMax:e.detail.value||60},()=>this.filterDemo());},
   onCityChange(e){this.setData({cityIndex:Number(e.detail.value)},()=>this.filterDemo());},
   filterDemo(){
     const min=Number(this.data.ageMin)||18, max=Number(this.data.ageMax)||60;
@@ -26,10 +37,16 @@ Page({
     this.setData({visibleMatches:list.slice(0,2),shownCount:list.length});
   },
   onMatch(){
-    this.setData({matchStarted:true,round:this.data.round+1},()=>{
+    if(this.data.remaining<=0){wx.showToast({title:'今日演示次数已用完',icon:'none'});return;}
+    if(this.data.shownCount===0){wx.showToast({title:'当前筛选下没有演示资料',icon:'none'});return;}
+    const usage=wx.getStorageSync('hepai_match_usage')||{};
+    const used=(usage.day===localDay()?Number(usage.used)||0:0)+1;
+    wx.setStorageSync('hepai_match_usage',{day:localDay(),used});
+    this.setData({remaining:Math.max(0,10-used),round:this.data.round+1},()=>{
       this.filterDemo();
-      wx.showToast({title:'展示的是虚构演示资料',icon:'none'});
+      wx.showToast({title:'已切换演示资料，不是真人匹配',icon:'none',duration:2200});
     });
   },
-  onReport(){wx.showModal({title:'举报功能演示',content:'该演示不会提交举报，也不会触发审核或处罚。正式服务需接入可审计的审核和申诉流程。',showCancel:false});}
+  onLike(e){wx.showModal({title:'演示功能',content:`“${e.currentTarget.dataset.name}”是虚构资料，招呼没有发送。真实私聊尚未接入。`,showCancel:false});},
+  onReport(e){wx.showModal({title:'举报入口演示',content:`当前不会提交对“${e.currentTarget.dataset.name}”的举报。真实审核与申诉服务尚未接入。`,showCancel:false});}
 });

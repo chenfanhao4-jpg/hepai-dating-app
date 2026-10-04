@@ -1,8 +1,7 @@
 {
   "pages": [
     "pages/match/index",
-    "pages/chat/index",
-    "pages/memory/index",
+    "pages/messages/index",
     "pages/me/index"
   ],
   "window": {
@@ -18,8 +17,7 @@
     "borderStyle": "white",
     "list": [
       {"pagePath":"pages/match/index","text":"匹配"},
-      {"pagePath":"pages/chat/index","text":"聊聊"},
-      {"pagePath":"pages/memory/index","text":"记忆"},
+      {"pagePath":"pages/messages/index","text":"消息"},
       {"pagePath":"pages/me/index","text":"我的"}
     ]
   },
