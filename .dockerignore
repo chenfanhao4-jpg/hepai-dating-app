@@ -1,0 +1,8 @@
+.git
+.env
+server/.env
+server/.venv
+server/__pycache__
+server/*.py[cod]
+server/*.log
+server/*.db
