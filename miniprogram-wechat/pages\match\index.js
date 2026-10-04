@@ -33,4 +33,3 @@ Page({
   },
   onReport(){wx.showModal({title:'举报功能演示',content:'该演示不会提交举报，也不会触发审核或处罚。正式服务需接入可审计的审核和申诉流程。',showCancel:false});}
 });
-

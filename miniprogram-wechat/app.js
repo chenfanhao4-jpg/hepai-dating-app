@@ -5,4 +5,3 @@ App({
     adultConfirmed: false
   }
 });
-
